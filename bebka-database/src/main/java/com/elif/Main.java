@@ -6,7 +6,9 @@ import java.sql.*;
 
 public class Main {
     public static void main(String[] args) {
-       /* String insertSql = "INSERT INTO users(name, email) VALUES(?,?)";
+       /*
+       // Add data with PreparedStatement
+       String insertSql = "INSERT INTO users(name, email) VALUES(?,?)";
 
         try{
             Connection conn = DatabaseConnectionConfig.getConnection();
@@ -23,6 +25,9 @@ public class Main {
 
         */
 
+        /*
+        // List data with ResultSet
+
         String sql = "SELECT * FROM users";
 
         try{
@@ -37,6 +42,32 @@ public class Main {
                 System.out.println("Email: " + resultSet.getString("email"));
             }
             prSt.close();
+            conn.close();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+         */
+
+        String updateSql = "UPDATE users SET email = ? WHERE id = ?";
+        String deleteSql = "DELETE FROM users WHERE id = ?";
+
+        try{
+            Connection conn = DatabaseConnectionConfig.getConnection();
+
+           // UPDATE
+            PreparedStatement prSt = conn.prepareStatement(updateSql);
+            prSt.setString(1, "elftsdmr@gmail.com");
+            prSt.setInt(2, 3);
+            prSt.executeUpdate();
+
+            // DELETE
+            PreparedStatement pr = conn.prepareStatement(deleteSql);
+            pr.setInt(1, 5);
+            pr.executeUpdate();
+
+            prSt.close();
+            pr.close();
             conn.close();
         }catch(SQLException e){
             System.out.println(e.getMessage());
