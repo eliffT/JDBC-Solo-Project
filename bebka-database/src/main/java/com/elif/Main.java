@@ -3,26 +3,25 @@ package com.elif;
 import com.elif.config.DatabaseConnectionConfig;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Main {
     public static void main(String[] args) {
-
-        String sql = "CREATE TABLE IF NOT EXISTS users(" +
-                "id SERIAL PRIMARY KEY," +
-                "name VARCHAR(100)," +
-                "email VARCHAR(100))";
+        String insertSql = "INSERT INTO users(name, email) VALUES(?,?)";
 
         try{
             Connection conn = DatabaseConnectionConfig.getConnection();
-            System.out.println("Connected!");
-            Statement statement = conn.createStatement();
-            statement.execute(sql);
-            System.out.println("Table created.");
-            statement.close();
+            PreparedStatement prSt = conn.prepareStatement(insertSql);
+            prSt.setString(1, "Elif");
+            prSt.setString(2, "elif@gmail.com");
+            prSt.executeUpdate();
+            System.out.println("Record added.");
+            prSt.close();
             conn.close();
-        }catch(Exception e){
-            throw new RuntimeException(e);
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
         }
     }
 }
