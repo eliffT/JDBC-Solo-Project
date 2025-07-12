@@ -6,7 +6,28 @@ import java.sql.*;
 
 public class Main {
     public static void main(String[] args) {
-       /*
+    /*
+       //Create Table
+        String sql = "CREATE TABLE IF NOT EXISTS users(" +
+                "id SERIAL PRIMARY KEY," +
+                "name VARCHAR(100)," +
+                "email VARCHAR(100))";
+
+        try{
+            Connection conn = DatabaseConnectionConfig.getConnection();
+            System.out.println("Connected!");
+            Statement statement = conn.createStatement();
+            statement.execute(sql);
+            System.out.println("Table created.");
+            statement.close();
+            conn.close();
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+
+    */
+
+    /*
        // Add data with PreparedStatement
        String insertSql = "INSERT INTO users(name, email) VALUES(?,?)";
 
@@ -23,9 +44,9 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
-        */
+    */
 
-        /*
+    /*
         // List data with ResultSet
 
         String sql = "SELECT * FROM users";
@@ -47,7 +68,7 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
-         */
+    */
 
         String updateSql = "UPDATE users SET email = ? WHERE id = ?";
         String deleteSql = "DELETE FROM users WHERE id = ?";
