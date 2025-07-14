@@ -65,9 +65,10 @@ Projede, kullanıcı bilgilerini (isim, e-posta, yaş) yönetmek için `UserDAO`
 
 ```text
 ├── dao
-│   └── UserDAO.java       --> Veritabanı işlemleri burada yapılır
+│   └── UserDAO.java       
+│   └── UserDAOImpl.java    
 ├── user
-│   └── User.java          --> Kullanıcı bilgilerini temsil eden POJO sınıfı
+│   └── User.java         
 ├── config
 │   └── DatabaseConfig.java 
 │   └── DatabaseConnectionConfig.java  --> Veritabanı bağlantı yapılandırması
