@@ -1,6 +1,8 @@
 package com.elif.dao;
 import com.elif.user.User;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO{
     private final Connection connection;
@@ -65,19 +67,23 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void findAll() {
+    public List<User> findAll() {
+        List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM userss";
 
-        try(PreparedStatement prst = connection.prepareStatement(sql)){
-            ResultSet rs = prst.executeQuery();
-            while (rs.next()){
-                System.out.println("-----------------------------------------------------");
-                System.out.println("ID: " + rs.getInt("id"));
-                System.out.println( "Name: " + rs.getString("name"));
-                System.out.println("Age: " + rs.getInt("age"));
+        try (PreparedStatement prst = connection.prepareStatement(sql);
+             ResultSet rs = prst.executeQuery()) {
+
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setAge(rs.getInt("age"));
+                users.add(user);
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return users;
     }
 }
