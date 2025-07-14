@@ -43,3 +43,33 @@ String user = "kullanici";
 String password = "sifre";
 
 Connection conn = DriverManager.getConnection(url, user, password);
+```
+
+## 🧩 DAO (Data Access Object) Katmanı
+
+Bu projede, **DAO (Data Access Object)** tasarım deseni kullanılmıştır. Bu desen sayesinde veritabanı işlemleri, uygulamanın diğer katmanlarından ayrılarak daha modüler, okunabilir ve sürdürülebilir bir yapı elde edilmiştir.
+
+### 🎯 DAO Yapısının Amacı
+
+DAO deseni, veritabanı ile ilgili işlemlerin (CRUD: Create, Read, Update, Delete) tek bir sınıfta toplanmasını sağlar. Böylece:
+
+- Veritabanı işlemleri merkezi bir noktadan kontrol edilir.
+- Kodun tekrar kullanımı artar.
+- Uygulamanın bakımı ve test edilmesi kolaylaşır.
+
+## 🧪 DAO Nasıl Kullanılır?
+
+Projede, kullanıcı bilgilerini (isim, e-posta, yaş) yönetmek için `UserDAO` sınıfı kullanılmıştır. DAO yapısı sayesinde tüm veritabanı işlemleri bu sınıf içerisinde toplanmıştır. Bu yapı, veri erişim katmanını izole ederek uygulamanın daha temiz, okunabilir ve yönetilebilir olmasını sağlar.
+
+### 📁 Sınıf Yapısı
+
+```text
+├── dao
+│   └── UserDAO.java       --> Veritabanı işlemleri burada yapılır
+├── user
+│   └── User.java          --> Kullanıcı bilgilerini temsil eden POJO sınıfı
+├── config
+│   └── DatabaseConfig.java 
+│   └── DatabaseConnectionConfig.java  --> Veritabanı bağlantı yapılandırması
+
+
